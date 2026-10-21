@@ -10,7 +10,7 @@ font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans
 
 body{
 
-background:#181718;
+background:#080808;
 
 }
 
@@ -19,7 +19,7 @@ background:#181718;
 
 .navbar{
 
-background:#181718;
+background:#0f0f0f;
 
 padding:18px 8%;
 
@@ -214,7 +214,7 @@ margin-bottom:50px;
 
 height: 390px;
 
-background:#1f1f1f;
+background:#0f0f0f;
 
 border-color: #ffffff;
 
@@ -262,15 +262,6 @@ text-align: left;
 
 }
 
-.card h3{
-
-font-size:25px;
-
-color:#f3e4ea;
-
-
-}
-
 .card p{
 
 line-height:1.6;
@@ -285,15 +276,15 @@ margin-bottom:25px;
 
 width:100%;
 
-background:#1f1f1f;
+background:#0f0f0f;
 
 border-color: #ffffff57;
 
-color:#ffffffa9;
+color:#f3e4ea;
 
 border-style:none;
 
-font-size:18px;
+font-size:25px;
 
 cursor:pointer;
 
@@ -311,7 +302,7 @@ color:#f5d6e3;
 /*Roda pé*/
 .footer{
     margin-top:60px;
-    background:#181718;
+    background:#0f0f0f;
     color:#ffffff;
     border-top:4px solid #494849f8;
 }

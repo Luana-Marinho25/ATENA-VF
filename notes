@@ -2,3 +2,25 @@
           <strong>Tema do Formulário</strong>
           <strong>Data e Horário</strong>
           <strong>Acertos</strong>
+
+
+
+
+
+          
+  <div class="content">
+     <br><br><h2>HISTÓRICO</h2><br>
+     <div class="historico-card">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nome do Usuário</th>
+          <th>Tema do Formulário</th>
+          <th>Data e Horário</th>
+          <th>Acertos</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-historico"></tbody>
+    </table>
+  </div>

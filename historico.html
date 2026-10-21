@@ -5,173 +5,350 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atena</title>
     <link rel="stylesheet" href="style.css">
-
-  <style>
-    html, body {
-    height: 100%;
-    margin: 0;
-  }
-
-  body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .content{
-    width:90%;
-    max-width:1200px;
-    margin:60px auto;
-}
-
-.historico-card {
-    background: #ffffff;
-    padding: 2px;
-    box-shadow: 0 15px 35px rgba(0,0,0,.15);
-}
-   h2{
-    color:#fff;
-    font-size:52px;
-    margin-bottom:35px;
-    text-align: center;
-}
-
-   table {
-    width: 100%;
-    margin: 0;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-    th, td {
-      border: 1px solid #ddd;
-      text-align: center;
-    }
-
-   th{
-    background:#8b67a8;
-    color:white;
-    font-size:16px;
-    font-weight:600;
-    padding:18px;
-}
-  td{
-    padding:18px;
-    color:#444;
-  }
-
-  tbody tr{
-    transition:.2s;
-  }
-
-  tbody tr:hover{
-    background:#f3f4fa;
-  }
-
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-  .acoes {
-    text-align: center;
-    margin: 30px 0;
-}
-
-#limparHistorico{
-    background:#d32f2f;
-    color:white;
-    padding:14px 28px;
-    font-size:15px;
-    font-weight:600;
-    transition:.25s;
-}
-
-#limparHistorico:hover{
-    transform:translateY(-2px);
-    background:#b71c1c;
-}
-  </style>
 </head>
+   <style>
+        * {
+            box-sizing: border-box;
+        }
 
+        html, body {
+            min-height: 100%;
+            margin: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Conteúdo principal */
+        .content {
+            width: 90%;
+            max-width: 1400px;
+            margin: 45px auto 60px;
+            flex: 1;
+        }
+
+        .titulo-historico {
+            color: #68458a;
+            font-size: clamp(30px, 4vw, 48px);
+            text-align: center;
+            margin: 0 0 35px;
+        }
+
+        /* Cartão dividido em duas colunas */
+        .historico-card {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 0;
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(75, 48, 105, 0.15);
+            border: 1px solid #e6def0;
+        }
+
+        /* Lado esquerdo: imagem */
+        .historico-imagem {
+            min-height: 500px;
+            background: #eee5f5;
+            display: flex;
+        }
+
+        .historico-imagem img {
+            width: 100%;
+            height: 100%;
+            min-height: 480px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 9px;
+            display: block;
+        }
+
+        /* Lado direito: tabela */
+        .historico-dados {
+            min-width: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+        }
+
+        .historico-dados h3 {
+            color: #68458a;
+            font-size: 24px;
+            margin: 0 0 22px;
+        }
+
+        .tabela-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 560px;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid #e0d9e9;
+        }
+
+        th {
+            background: #8b67a8;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        td {
+            color: #444;
+            font-size: 14px;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8f5fb;
+        }
+
+        tbody tr:hover {
+            background: #eee5f5;
+            transition: background 0.2s;
+        }
+
+        /* Botão de limpar */
+        .acoes {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        #limparHistorico {
+            background: linear-gradient(145deg,#d7b3e5, #8b67a8, #823fce);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        #limparHistorico:hover {
+            background: #823fce;
+            transform: translateY(-2px);
+        }
+
+        #limparHistorico:focus-visible {
+            outline: 3px solid #8b67a8;
+            outline-offset: 3px;
+        }
+
+        /* Ajustes para tablets e celulares */
+        @media (max-width: 900px) {
+            .content {
+                width: 94%;
+                margin: 30px auto 40px;
+            }
+
+            .historico-card {
+                grid-template-columns: 1fr;
+            }
+
+            .historico-imagem {
+                min-height: 0;
+                height: 320px;
+            }
+
+            .historico-imagem img {
+                min-height: 0;
+                height: 100%;
+                object-position: center 35%;
+            }
+
+            .historico-dados {
+                padding: 24px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .historico-imagem {
+                height: 240px;
+            }
+
+            .historico-dados {
+                padding: 20px 12px;
+            }
+
+            .historico-dados h3 {
+                font-size: 21px;
+            }
+
+            th, td {
+                padding: 12px 10px;
+            }
+        }
+    </style>
 <body>
-  <header class="navbar">
+    <header class="navbar">
+        <a href="inicio.html" class="logo">ATENA</a>
 
-    <a href="#" class="logo">ATENA</a>
+        <nav>
+            <ul>
+                <li><a href="inicio.html">Início</a></li>
+                <li><a href="historico.html">Histórico</a></li>
+                <li><a href="Guia.html">Guia</a></li>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <nav>
-
-        <ul>
-
-            <li><a href="inicio.html">Início</a></li>
-            <li><a href="historico.html">Histórico</a></li>
-            <li><a href="Guia.html">Guia</a></li>
-            <li><a href="perfil.html">Perfil</a></li>
-            <li><a href="contato.html">Contato</a></li>
-
-        </ul>
-
-    </nav>
-
-</header>
+    <!-- Conteúdo do histórico -->
+    <main class="content">
 
 
-  <div class="content">
-     <br><br><h2>HISTÓRICO</h2><br>
-     <div class="historico-card">
+        <section class="historico-card"
+                 aria-label="Histórico de formulários respondidos">
 
-    <table>
-      <thead>
-        <tr>
-          <th>Nome do Usuário</th>
-          <th>Tema do Formulário</th>
-          <th>Data e Horário</th>
-          <th>Acertos</th>
-        </tr>
-      </thead>
-      <tbody id="tabela-historico"></tbody>
-    </table>
-  </div>
-<script>
-    const tabela = document.getElementById('tabela-historico');
-    const historico = JSON.parse(localStorage.getItem('formularios')) || [];
+            <!-- Coluna esquerda: imagem -->
+            <div class="historico-imagem">
+                <img
+                    src="AtenaHistorico.jpg" alt="Atena">
+            </div>
 
-    if (historico.length === 0) {
-      tabela.innerHTML = `<tr><td colspan="4" style="text-align:center;">Nenhum formulário foi respondido até o momento.</td></tr>`;
-    } else {
-      historico.forEach(item => {
-        // 🔹 Espera que o objeto no localStorage tenha:
-        // nome, temaFormulario, data, horario, acertos e totalQuestoes (opcional)
-        const linha = `
-          <tr>
-            <td>${item.nome}</td>
-            <td>${item.temaFormulario}</td>
-            <td>${item.data} ${item.horario}</td>
-            <td>${item.acertos} / ${item.totalQuestoes || '-'}</td>
-          </tr>`;
-        tabela.innerHTML += linha;
-      });
-    }
+            <!-- Coluna direita: tabela e botão -->
+            <div class="historico-dados">
 
-    // 🔹 Botão para limpar histórico
-    document.getElementById('limparHistorico').addEventListener('click', () => {
-      if (confirm("Tem certeza que deseja limpar todo o histórico?")) {
-        localStorage.removeItem('formularios');
-        tabela.innerHTML = `<tr><td colspan="4" style="text-align:center;">Nenhum formulário foi respondido até o momento.</td></tr>`;
-        alert("Histórico apagado com sucesso!");
-      }
-    });
-    
-  </script>
-      <br><br>
-      <div class="acoes">
-      <button id="limparHistorico">Limpar Histórico</button>
-      </div>
-    </div>
-  </div>
+                <h3>HISTÓRICO</h3>
+
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome do Usuário</th>
+                                <th>Tema do Formulário</th>
+                                <th>Data e Horário</th>
+                                <th>Acertos</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabela-historico">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="acoes">
+                    <button type="button" id="limparHistorico">
+                        Limpar Histórico
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+
+    <script>
+        const tabela = document.getElementById('tabela-historico');
+        const botaoLimpar = document.getElementById('limparHistorico');
+
+        // Recupera o histórico salvo no navegador
+        function obterHistorico() {
+            try {
+                const dados = localStorage.getItem('formularios');
+                const historico = dados ? JSON.parse(dados) : [];
+
+                return Array.isArray(historico) ? historico : [];
+            } catch (erro) {
+                console.error('Erro ao carregar o histórico:', erro);
+                return [];
+            }
+        }
+
+        // Cria uma célula usando texto seguro
+        function criarCelula(valor) {
+            const celula = document.createElement('td');
+            celula.textContent = valor ?? '-';
+            return celula;
+        }
+
+        // Exibe os registros na tabela
+        function carregarHistorico() {
+            const historico = obterHistorico();
+
+            tabela.replaceChildren();
+
+            if (historico.length === 0) {
+                const linha = document.createElement('tr');
+                const celula = criarCelula(
+                    'Nenhum formulário foi respondido até o momento.'
+                );
+
+                celula.colSpan = 4;
+                linha.appendChild(celula);
+                tabela.appendChild(linha);
+                return;
+            }
+
+            historico.forEach(item => {
+                const linha = document.createElement('tr');
+
+                linha.appendChild(criarCelula(item.nome));
+                linha.appendChild(criarCelula(item.temaFormulario));
+
+                const dataHorario = [
+                    item.data,
+                    item.horario
+                ].filter(Boolean).join(' ');
+
+                linha.appendChild(criarCelula(dataHorario || '-'));
+
+                const acertos = item.acertos ?? '-';
+                const total = item.totalQuestoes ?? '-';
+
+                linha.appendChild(
+                    criarCelula(`${acertos} / ${total}`)
+                );
+
+                tabela.appendChild(linha);
+            });
+        }
+
+        // Limpa o histórico após confirmação
+        botaoLimpar.addEventListener('click', () => {
+            const confirmado = confirm(
+                'Tem certeza que deseja limpar todo o histórico?'
+            );
+
+            if (!confirmado) {
+                return;
+            }
+
+            try {
+                localStorage.removeItem('formularios');
+                carregarHistorico();
+                alert('Histórico apagado com sucesso!');
+            } catch (erro) {
+                console.error('Erro ao limpar o histórico:', erro);
+                alert('Não foi possível limpar o histórico.');
+            }
+        });
+
+        // Carrega os dados quando a página é aberta
+        carregarHistorico();
+    </script>
+
 <footer class="footer">
     <div class="footer-container">
 
